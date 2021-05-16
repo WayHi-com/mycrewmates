@@ -91,7 +91,7 @@ class Generator(commands.Cog):
         # Create Embed
         embed = discord.Embed(title=title, color=0x00C700)
         embed.add_field(name=description, value=embed_message)
-        embed.set_footer(text='Footer Details Here.')
+        embed.set_footer(text='Created by vault dweller#1654.')
 
         # Send Embed
         message = await channel.send(embed=embed)
