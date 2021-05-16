@@ -46,7 +46,7 @@ async def on_guild_join(guild):
 # Load Cogs
 for filename in os.listdir('./cogs'):
     if filename != '__init__.py' and filename.endswith('.py'):
-        client.load_extension(f'/app/cogs.{filename[:-3]}')
+        client.load_extension(f'/cogs.{filename[:-3]}')
 
 
 # Run Bot
