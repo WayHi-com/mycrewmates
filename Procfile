@@ -1,1 +1,1 @@
-worker:node app.py
+worker: python3 app.py
