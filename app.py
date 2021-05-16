@@ -37,7 +37,7 @@ async def on_guild_join(guild):
         "allow_vc": True,
         "allow_tc": False,
         "create_lobby_channel": -1,
-        "create_lobby_category": -1,
+        "lobby_category": -1,
         "lobbies": [],
         "generators": []
     })
