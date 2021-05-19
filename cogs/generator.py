@@ -44,6 +44,8 @@ class Generator(commands.Cog):
     @staticmethod
     async def create(ctx, args):
 
+        guild_data = DATABASE['guilds'].find_one({"guild_id": ctx.guild.id})
+
         await ctx.send('Creating a new Lobby Generator.')
 
         # Get a channel for the Generator
@@ -89,8 +91,15 @@ class Generator(commands.Cog):
             embed_message += f'{pair[0]}: {pair[1]}\n'
         
         # Create Embed
-        embed = discord.Embed(title=title, color=0x00C700)
-        embed.add_field(name=description, value=embed_message)
+        embed = discord.Embed(
+            title=title, 
+            color=0x00C700,
+            description = f'''
+            **{description}**
+            
+            {embed_message}
+            '''
+        )
         embed.set_footer(text='With ❤️ MyCrewmates')
 
         # Send Embed
@@ -121,6 +130,9 @@ async def get_user_response(ctx, prompt):
         ctx.send(CONFIGS['exception_message'], delete_after=CONFIGS['delete_after'])
         return
 
+
+
+    # Return Response
     return response
 
 
