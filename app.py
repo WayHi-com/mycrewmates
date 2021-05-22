@@ -23,6 +23,67 @@ intents.members = True
 client = commands.Bot(command_prefix=CONFIGS['prefix'], intents=intents)
 
 
+# Help Command
+class MyHelp(commands.HelpCommand):
+    async def send_bot_help(self, mapping):
+        channel = self.get_destination()
+        prefix = self.context.prefix
+
+        embed = discord.Embed(title='**Help**', color=0x00C700)
+        commands = f'''
+**Admin Commands**
+
+{prefix}admin toggle_tc
+(Toggles Text Channel Lobbies)
+Aliases:
+toggle-tc, toggletc, ttc
+
+{prefix}admin set_create_lobby_channel <Channel ID>
+(Sets the VC that a user must be in to create a Lobby)
+Aliases:
+set-create-lobby-channel, create_lobby_channel, create-lobby-channel, lobby_channel, lobby-channel, sclc
+
+{prefix}admin set_lobby_category <Category ID>
+(Sets the Category that a Lobby is created in)
+Aliases:
+set-lobby-category, lobby_category, lobby-category, slc
+
+**Generator Commands**
+
+{prefix}generator create <#channel>
+(Creates a Lobby Generator)
+
+**Lobby Commands**
+
+{prefix}lobby lock
+(Toggles a Lobby lock (in the same way as Grove Gaming) )
+
+{prefix}lobby spectate_mode
+(Toggles a Lobby Spectate Mode (in the same way as Grove Gaming) )
+Aliases:
+spectate-mode, spectatemode, spectate
+
+{prefix}lobby size <new size>
+(Sets the capacity of a Lobby VC)
+
+{prefix}lobby name <new name>
+(Changes the name of a Lobby VC)
+'''
+        support = f'''
+For additional support or questions, join the bot's home here:
+https://discord.gg/M2ry8MN7bd
+To invite this bot to your own server, use this link:
+{discord.utils.oauth_url(client_id=client.user.id, permissions=discord.Permissions(permissions=8))}        
+'''
+
+        embed.add_field(name='***Commands***', value=commands, inline=True)
+        embed.add_field(name='***Support***', value=support, inline=True)
+        await channel.send(embed=embed)
+
+
+client.help_command = MyHelp()
+
+
 # Confirm Bot is live
 @client.event
 async def on_ready():
